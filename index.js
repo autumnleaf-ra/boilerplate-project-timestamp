@@ -32,7 +32,11 @@ app.get("/api/:date?", (req,res) => {
   if(!dateParam){
     date = new Date();
   } else {
-    date = new Date(dateParam);
+    if(/^\d{13}$/.test(dateParam)){
+      date = new Date(parseInt(dateParam));
+    } else {
+      date = new Date(dateParam);
+    }
   }
 
   if(isNaN(date.getTime())) {
